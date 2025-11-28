@@ -1,9 +1,27 @@
-This is used to find paddings of Cylic tag systems such that the cylic tag system still computes the same thing.
+# Padding Cyclic Tag Systems (CTS)
 
-Example
-["011011","011011"]
-if you pad it with 6 cells
-['000000'+'011011', '000000'+'011011']
-or just ['000000011011', '000000011011']
-it will be an equalivant CTS program.
-This is used for rule 110 compilation because it requires programs to be lengths, multiples of 6.
+Cyclic Tag Systems sometimes require **padding** to ensure they compute the same function while meeting specific constraints. 
+For example, in **Rule 110 compilation**, CTS programs must have lengths that are multiples of 6.
+
+## How it works
+
+Given a CTS program:
+
+```
+["011011", "011011"]
+```
+
+You can pad it with 6 cells:
+
+```
+["000000011011", "000000011011"]
+```
+
+or equivalently:
+
+```
+['000000' + '011011', '000000' + '011011']
+```
+
+Both versions are **functionally equivalent**; the padding does not change the computation, it only adjusts the program length.
+This technique is essential when preparing CTS programs for **Rule 110 compilation**, ensuring all rules have lengths divisible by 6.
