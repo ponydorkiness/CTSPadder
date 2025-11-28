@@ -3,7 +3,8 @@
 Cyclic Tag Systems sometimes require **padding** to ensure they compute the same function while meeting specific constraints. 
 For example, in **Rule 110 compilation**, CTS programs must have lengths that are multiples of 6.
 
-## How it works
+## Padding
+
 
 Given a CTS program:
 
