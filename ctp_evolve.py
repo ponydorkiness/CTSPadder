@@ -2,16 +2,6 @@ import itertools
 from collections import deque
 import time
 
-def string_chunks(string, x):
-    new = ''
-    cnt = 0
-    for ch in string:
-        if cnt%x==0 and cnt!=0:
-            new += ''
-        cnt += 1
-        new += ch
-    return new
-
 def compare_strings(a, b):
     return a.startswith(b) or b.startswith(a)
 
