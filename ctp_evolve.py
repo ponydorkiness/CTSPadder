@@ -49,7 +49,7 @@ def main():
     for row in itertools.product(range(min_padding,max_padding+1), repeat=length):
         padded_rules = pad(row, rules)
         lengths = [len(s) for s in padded_rules]
-        if all(l % 6 == 0 for l in lengths):
+        if all(l % 6 == 0 for l in lengths): # This checks for divisblity of six, you can change it or remove it if you don't care about divisbility.
             if compare_rules(padded_rules, rules, 10):
                 #print(padded_rules)
                 print(lengths, row)  # row shows the integer padding us
