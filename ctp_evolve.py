@@ -51,8 +51,7 @@ def main():
         lengths = [len(s) for s in padded_rules]
         if all(l % 6 == 0 for l in lengths):
             if compare_rules(padded_rules, rules, 10):
-                print(padded_rules)
-                break
+                #print(padded_rules)
                 print(lengths, row)  # row shows the integer padding us
     
 main()
