@@ -30,7 +30,7 @@ This technique is essential when preparing CTS programs for **Rule 110 compilati
 ## How it works.
 
 Two check if two programs with padding are **functionally equvalent** a history of their states must be made.
-Given the ruleset [1,101] an example run of getting it's fingerprint looks like this.
+Given the ruleset [1,101] an example run of getting it's state history looks like this.
 
 ```
 1
@@ -40,7 +40,7 @@ Given the ruleset [1,101] an example run of getting it's fingerprint looks like 
 101
 > 0
 011
-11   # As you can see nothing is being appened at this step because the zero doesn't affect the fingerprints.
+11   # As you can see nothing is being appened at this step because the zero doesn't affect the state history.
 > 0
 
 # So the state history of this program for the first 4 appendings is
