@@ -13,19 +13,21 @@ def string_chunks(string, x):
 def compare_strings(a, b):
     return a.startswith(b) or b.startswith(a)
 
-def run(rules,gens):
+def run(rules, gens):
     tape = "1"
     state = 0
     output = ""
+    
     while len(output.replace("*","")) != gens:
-        #print(string_chunks(tape,6))
-        popped_symbol = tape[-1:]
-        tape = tape[:-1]
+        popped_symbol = tape[0]
+        tape = tape[1:]
+        
         if popped_symbol == "1":
             output += str(state) + "*"
-            tape = rules[state] + tape
+            tape = tape + rules[state]        
         state += 1
-        state = state%len(rules)
+        state = state % len(rules)
+    
     return output
 
 def compare_rules(rules1,rules2,gens=10,debug=False):
@@ -42,7 +44,7 @@ def pad(padding, array):
 
 def main():
     rules = ["1","101"]
-    min_padding = 0
+    min_padding = 1000
     max_padding = 2000
     length = len(rules)
 
@@ -50,9 +52,9 @@ def main():
         padded_rules = pad(row, rules)
         lengths = [len(s) for s in padded_rules]
         if all(l % 6 == 0 for l in lengths): # This checks for divisblity of six, you can change it or remove it if you don't care about divisbility.
-            if compare_rules(padded_rules, rules, 10):
+            if compare_rules(padded_rules, rules, 5): 
                 #print(padded_rules)
                 print(lengths, row)  # row shows the integer padding us
     
 main()
-#print(compare_rules(pad([1908,1906],["1","101"]),["1","101"],200,debug=True))
+#print(run(["1","101"],10))
