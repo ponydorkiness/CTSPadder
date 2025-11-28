@@ -26,3 +26,52 @@ or equivalently:
 
 Both versions are **functionally equivalent**; the padding does not change the computation, it only adjusts the program length.
 This technique is essential when preparing CTS programs for **Rule 110 compilation**, ensuring all rules have lengths divisible by 6.
+
+## How it works.
+
+Two check if two programs with padding are **functionally equvalent** a history of their states must be made.
+Given the ruleset [1,101] an example run of getting it's fingerprint looks like this.
+
+```
+1
+> 0  # This means we will append 0, because we see a 1 has been hit in the tape and we are in rule 0.
+1
+> 1
+101
+> 0
+011
+11   # As you can see nothing is being appened at this step because the zero doesn't affect the fingerprints.
+> 0
+
+# So the state history of this program for the first 4 appendings is
+0*1*0*0
+```
+
+You can not just add padding and expect the CTS to still work because adding zeros progresses the rules of the cylic tag, we need to pad it while keeping the timing the same.
+So you generate multiple different amount of paddings of zeros, and check if the state history matches up, if you do then it's a match and it's good to go!
+
+## Small proof it works
+Given the ruleset
+```plaintext
+  ["1010", "1010"]
+````
+ It is possible to pad it with a padding of length 8.
+<pre>
+['<b>00000000</b>1010', '<b>00000000</b>1010']
+</pre>
+
+If we run it and check every single time the programs encounters a zero we can see the real program act as expected
+<pre>
+1010
+0101010
+010101010
+</pre>
+Now looking at the padded program we can see it is identical however it has paddings with length 8 in it's running, however they are fuctionally equalivant.
+<pre>
+<b>00000000</b>1010
+010<b>00000000</b>1010
+<b>00000000</b>01010<b>00000000</b>1010
+</pre>
+
+
+
