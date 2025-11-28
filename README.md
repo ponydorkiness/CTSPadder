@@ -28,7 +28,7 @@ Both versions are **functionally equivalent**; the padding does not change the c
 However not all paddings are created equally, because certain paddings messes up timings, so we have to create a program *this program* to find paddings that don't mess up the state history.
 This technique is essential when preparing CTS programs for **Rule 110 compilation**, ensuring all rules have lengths divisible by 6.
 
-## How it works.
+## Retrieving the state history.
 
 Two check if two programs with padding are **functionally equvalent** a history of their states must be made.
 Given the ruleset [1,101] an example run of getting it's state history looks like this.
@@ -50,6 +50,8 @@ Given the ruleset [1,101] an example run of getting it's state history looks lik
 
 You can not just add padding and expect the CTS to still work because adding zeros progresses the rules of the cylic tag, we need to pad it while keeping the timing the same.
 So you generate multiple different amount of paddings of zeros, and check if the state history matches up, if you do then it's a match and it's good to go!
+However, do not be mislead. It is possible that two unreleated machines create the same state history, that is why we are only checking padded programs because they append the same things.
+Do not try to check two unrelated machines and then say they are fuctionally equalivant, we can only say these are fuctionally equal because it is adding the same things onto the programs.
 
 ## Small proof it works
 Given the ruleset
