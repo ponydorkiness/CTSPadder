@@ -1,4 +1,6 @@
 import itertools
+from collections import deque
+import time
 
 def string_chunks(string, x):
     new = ''
@@ -14,21 +16,31 @@ def compare_strings(a, b):
     return a.startswith(b) or b.startswith(a)
 
 def run(rules, gens):
-    tape = "1"
+    tape = deque("1")
     state = 0
-    output = ""
+    output = []
+    num_rules = len(rules)
+    count = 0
     
-    while len(output.replace("*","")) != gens:
-        popped_symbol = tape[0]
-        tape = tape[1:]
+    while count < gens and tape:
+        while tape and tape[0] == "0":
+            tape.popleft()
+            state = (state + 1) % num_rules
+
+        if not tape:
+            break
         
-        if popped_symbol == "1":
-            output += str(state) + "*"
-            tape = tape + rules[state]  
-        state += 1
-        state = state % len(rules)
+        tape.popleft()
+        
+        output.append(str(state))
+        output.append("*")
+        
+        tape.extend(rules[state])
+        
+        state = (state + 1) % num_rules
+        count += 1
     
-    return output
+    return "".join(output)
 
 def compare_rules(rules1,rules2,gens=10,debug=False):
     if debug == True:
@@ -44,7 +56,7 @@ def pad(padding, array):
 
 def main():
     rules = ["1010","1010"]
-    min_padding = 0
+    min_padding = 1
     max_padding = 20
     length = len(rules)
 
@@ -55,5 +67,6 @@ def main():
             if compare_rules(padded_rules, rules, 2): 
                 #print(padded_rules)
                 print(lengths, row)  # row shows the integer padding us
-                
+
 main()
+#print(run(["1","00000000000000000000000000000000000000101"],10))
