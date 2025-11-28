@@ -15,13 +15,13 @@ Given a CTS program:
 You can pad it with 6 cells:
 
 ```
-["000000011011", "000000011011"]
+['000000' + '011011', '000000' + '011011']
 ```
 
 or equivalently:
 
 ```
-['000000' + '011011', '000000' + '011011']
+["000000011011", "000000011011"]
 ```
 
 Both versions are **functionally equivalent**; the padding does not change the computation, it only adjusts the program length.
