@@ -25,6 +25,7 @@ or equivalently:
 ```
 
 Both versions are **functionally equivalent**; the padding does not change the computation, it only adjusts the program length.
+However not all paddings are created equally, because certain paddings messes up timings, so we have to create a program *this program* to find paddings that don't mess up the state history.
 This technique is essential when preparing CTS programs for **Rule 110 compilation**, ensuring all rules have lengths divisible by 6.
 
 ## How it works.
